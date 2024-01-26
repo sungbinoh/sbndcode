@@ -1,0 +1,37 @@
+# File:    standard_reco2_sce_sbnd.fcl
+# Purpose: The standard reconstruction workflow for 'reco2', starts at 2D clustering and includes all high level reconstruction (+ SCE reco)
+# Version: 1.0
+#
+# Changes:
+# 20200923 (grayputnam@uchicago.edu) [v1.0]
+#   Initial definition
+#
+# job configuration
+
+#include "simulationservices_sbnd.fcl"
+#include "crtbacktrackeralg_sbnd.fcl"
+#include "reco_sbnd.fcl"
+
+process_name: Reco2Rerun
+
+
+services.ParticleInventoryService: @local::sbnd_particleinventoryservice
+services.BackTrackerService: @local::sbnd_backtrackerservice
+services.DetectorClocksService: @local::sbnd_detectorclocks
+
+physics.reco2_sce: [@sequence::physics.reco2,
+            pandoraSCE, pandoraSCETrack, pandoraSCEShower, pandoraSCEShowerSBN, pandoraSCECalo, pandoraSCEPid, crtspacepointmatchingSCE, crttrackmatchingSCE, fmatchSCE, opt0finderSCE]
+
+physics.trigger_paths: [ reco2_sce ]
+
+physics.analyzers.crtskim: {
+  module_type:       "CRTAnalysis"
+  CRTBackTrackerAlg: @local::crtbacktrackeralg_sbnd
+}
+physics.crtskimana: [ "crtskim" ]
+
+physics.end_paths: [stream1, caloskimana, crtskimana]
+
+
+# turn on space charge service
+#include "enable_spacecharge_services_sbnd.fcl"
