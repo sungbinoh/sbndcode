@@ -3,7 +3,7 @@
 // Plugin Type: analyzer (art v09_75_03_02)
 // File:        SBNDFlashAssAna_module.cc
 //
-// Copied SBNDFlashAssAna_module.cc from icaruscode to sbndcode (mailto:ascarpel@bnl.gov)
+// Copied ICARUSFlashAssAna_module.cc from icaruscode to sbndcode (mailto:ascarpel@bnl.gov)
 //
 // Module that dumps the association between Flashes and OpHit
 //
