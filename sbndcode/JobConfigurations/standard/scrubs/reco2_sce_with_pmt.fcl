@@ -9,7 +9,6 @@
 # job configuration
 
 #include "simulationservices_sbnd.fcl"
-#include "crtbacktrackeralg_sbnd.fcl"
 #include "reco_sbnd.fcl"
 
 process_name: Reco2Rerun
@@ -24,13 +23,19 @@ physics.reco2_sce: [@sequence::physics.reco2,
 
 physics.trigger_paths: [ reco2_sce ]
 
-physics.analyzers.crtskim: {
-  module_type:       "CRTCalibAna"
-  CRTBackTrackerAlg: @local::crtbacktrackeralg_sbnd
+physics.analyzers.pmtskim: {
+  module_type:       "SBNDFlashAssAna"
+  TriggerLabel: "generator"
+  DumpWaveformsInfo: true
+  OpDetWaveformLabels: ["opdecopmt", "opdecoxarapuca"]
+  OpHitLabels: ["ophitpmt", "ophitxarapuca"]
+  FlashLabels: ["opflashtpc0", "opflashtpc1", "opflashtpc0xarapuca", "opflashtpc1xarapuca"]
+  PEOpHitThreshold: 0
+  Debug: false
 }
-physics.crtskimana: [ "crtskim" ]
+physics.pmtskimana: [ "pmtskim" ]
 
-physics.end_paths: [stream1, caloskimana, crtskimana]
+physics.end_paths: [stream1, caloskimana, pmtskimana]
 
 
 # turn on space charge service

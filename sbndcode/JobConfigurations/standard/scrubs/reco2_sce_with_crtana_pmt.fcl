@@ -30,7 +30,19 @@ physics.analyzers.crtskim: {
 }
 physics.crtskimana: [ "crtskim" ]
 
-physics.end_paths: [stream1, caloskimana, crtskimana]
+physics.analyzers.pmtskim: {
+  module_type:       "SBNDFlashAssAna"
+  TriggerLabel: "generator"
+  DumpWaveformsInfo: true
+  OpDetWaveformLabels: ["opdecopmt", "opdecoxarapuca"]
+  OpHitLabels: ["ophitpmt", "ophitxarapuca"]
+  FlashLabels: ["opflashtpc0", "opflashtpc1", "opflashtpc0xarapuca", "opflashtpc1xarapuca"]
+  PEOpHitThreshold: 0
+  Debug: false
+}
+physics.pmtskimana: [ "pmtskim" ]
+
+physics.end_paths: [stream1, caloskimana, crtskimana, pmtskimana]
 
 
 # turn on space charge service

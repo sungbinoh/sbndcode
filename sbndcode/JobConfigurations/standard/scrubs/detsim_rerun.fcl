@@ -6,5 +6,6 @@
 #include "detsim_sce_lite.fcl"
 
 process_name: "DetSimRerun"
-
+outputs.out1.outputCommands: ["keep *_*_*_*",
+			     @sequence::g4_drops ]
 physics.simulate: [rns, crtsim, opdaq] # removes the "daq" producer
