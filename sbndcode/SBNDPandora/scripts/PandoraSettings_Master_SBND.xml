@@ -26,7 +26,9 @@
       <tool type = "LArStitchingCosmicRayMerging"><ThreeDStitchingMode>false</ThreeDStitchingMode></tool>
     </StitchingTools>
     <CosmicRayTaggingTools>
-      <tool type = "LArCosmicRayTagging"/>
+      <tool type = "LArCosmicRayTagging">
+	<CutMode>cautious</CutMode>
+      </tool>
     </CosmicRayTaggingTools>
     <SliceIdTools>
       <tool type = "LArBdtNeutrinoId">
